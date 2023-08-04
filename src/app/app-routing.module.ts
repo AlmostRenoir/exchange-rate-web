@@ -7,6 +7,10 @@ const routes: Routes = [
     path: 'fetch',
     loadChildren: () => import('./pages/currency-fetch/currency-fetch.module').then(m => m.CurrencyFetchModule),
   },
+  {
+    path: 'requests',
+    loadChildren: () => import('./pages/requests-history/requests-history.module').then(m => m.RequestsHistoryModule),
+  },
   { path: '**', redirectTo: 'fetch' }
 ];
 
