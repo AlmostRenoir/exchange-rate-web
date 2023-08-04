@@ -1,0 +1,51 @@
+<form [formGroup]="fetchForm" (ngSubmit)="onSubmit()">
+
+  <div class="row">
+    <div class="col-md-6 mb-1">
+      <label for="name" class="form-label">Your name</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        [ngClass]="{'is-valid': name?.valid, 'is-invalid': name?.invalid && name?.touched}"
+        id="name" 
+        placeholder="ex. John Smith"
+        formControlName="name"
+      >
+      <div *ngIf="name?.invalid && name?.touched" class="invalid-feedback">
+        <div *ngIf="name?.errors?.['required']">
+          Name is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-1">
+      <label for="currency" class="form-label">Currency</label>
+      <input 
+        type="text" 
+        class="form-control"
+        [ngClass]="{'is-valid': currency?.valid, 'is-invalid': currency?.invalid && currency?.touched}" 
+        id="currency" 
+        placeholder="ex. usd"
+        formControlName="currency"
+      >
+      <div *ngIf="currency?.invalid && currency?.touched" class="invalid-feedback">
+        <div *ngIf="currency?.errors?.['required']">
+          Currency is required.
+        </div>
+        <div *ngIf="currency?.errors?.['minlength'] || currency?.errors?.['maxlength']">
+          Currency must be 3 characters long code.
+        </div>
+      </div>
+      <div *ngIf="currency?.untouched" class="form-text">
+        You have to pass 3 letters code, not full name.
+      </div>
+    </div>
+  </div>
+
+  <button 
+    type="submit" 
+    [disabled]="!fetchForm.valid"
+    class="btn btn-primary mt-3"
+  >Fetch</button>
+
+</form>

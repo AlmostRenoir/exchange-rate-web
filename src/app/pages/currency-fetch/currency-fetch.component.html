@@ -1,0 +1,26 @@
+<app-fetch-form (fetch)="onFetch($event)"></app-fetch-form>
+<div class="mt-2"></div>
+
+<div *ngIf="fetchStatus == FetchStatus.Success">
+  <alert type="success">
+    Current exchange rate for {{ fetchedCurrency }} is <strong>{{ fetchResult!.value }}</strong>.
+  </alert>
+</div>
+
+<div *ngIf="fetchStatus == FetchStatus.NoValueForGivenCurrency">
+  <alert type="warning">
+    There is no available exchange rate for {{ fetchedCurrency }}.
+  </alert>
+</div>
+
+<div *ngIf="fetchStatus == FetchStatus.ServiceNotAvailable">
+  <alert type="danger">
+    Service is currently unavailable, try again later.
+  </alert>
+</div>
+
+<div *ngIf="fetchStatus == FetchStatus.Loading">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div> 
