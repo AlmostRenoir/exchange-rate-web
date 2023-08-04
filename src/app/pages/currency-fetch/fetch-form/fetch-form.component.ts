@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CurrencyFetchFormData } from 'src/app/models/currency-fetch-form-data.model';
+import { CurrencyFetchFormData } from 'src/app/models/currency-fetch/currency-fetch-form-data.model';
 
 @Component({
   selector: 'app-fetch-form',
@@ -9,7 +9,7 @@ import { CurrencyFetchFormData } from 'src/app/models/currency-fetch-form-data.m
 })
 export class FetchFormComponent {
 
-  @Output() submit = new EventEmitter<CurrencyFetchFormData>();
+  @Output() fetch = new EventEmitter<CurrencyFetchFormData>();
 
   fetchForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -21,7 +21,7 @@ export class FetchFormComponent {
       this.fetchForm.value.name!,
       this.fetchForm.value.currency!
     )
-    this.submit.emit(formData);
+    this.fetch.emit(formData);
   }
 
   get name() { return this.fetchForm.get('name'); }
